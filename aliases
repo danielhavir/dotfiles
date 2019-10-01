@@ -1,3 +1,0 @@
-alias l="ls -alt"
-alias pingg="ping google.com -c 10"
-
