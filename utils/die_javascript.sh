@@ -2,7 +2,7 @@
 # Uninstall using NPM
 npm uninstall npm -g || echo "NPM uninstall didn't work"
 # Try if Node's installed with Brew
-(brew uninstall node&&brew prune)||echo "Node was not installed with Brew"
+(brew uninstall node && brew prune) || echo "Node was not installed with Brew"
 # Remove all files and folders including Node or NPM
 rm -rf /usr/local/{lib/node{,/.npm,_modules},bin,share/man}/{npm*,node*,man1/node*}
 rm -rf /usr/local/bin/npm /usr/local/share/man/man1/node* /usr/local/lib/dtrace/node.d ~/.npm ~/.node-gyp /opt/local/bin/node opt/local/include/node /opt/local/lib/node_modules

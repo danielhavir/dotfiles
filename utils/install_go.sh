@@ -3,25 +3,25 @@
 # Resource 2: https://alexatnet.com/install-go-on-raspberry-pi/
 
 version="1.12"
-machine=`uname -m`
+machine=$(uname -m)
 
 bold=$(tput bold)
 yellow=$(tput setaf 3)
 green=$(tput setaf 2)
 normal=$(tput sgr0)
 
-if [ $machine == armv7l ]
+if [ "$machine" == "armv7l" ]
 then
     echo "Arch: $machine"
     tarfile="go$version.linux-armv6l.tar.gz"
-elif [ $machine == x86_64 ]
+elif [ "$machine" == "x86_64" ]
 then
-    os=`uname`
-    if [ $os == "Linux" ]
+    os=$(uname)
+    if [ "$os" == "Linux" ]
     then
         echo "Arch: $os $machine"
         tarfile="go$version.linux-amd64.tar.gz"
-    elif [ $os == "Darwin" ]
+    elif [ "$os" == "Darwin" ]
     then
         echo "Arch: $os $machine"
         tarfile="go$version.darwin-amd64.tar.gz"

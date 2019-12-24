@@ -72,14 +72,14 @@ func getIPAddress(prefix string) string {
 }
 
 func getLocalIPAddress() string {
-	ifconfig, err := exec.Command("ifconfig", "eno1").Output()
-	check(err)
-  
-  // It ain't silly if it works
-	ifconfig = regexp.MustCompile("inet \\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}").Find(ifconfig)
-	ifconfig = regexp.MustCompile("\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}").Find(ifconfig)
+    ifconfig, err := exec.Command("ifconfig", "eno1").Output()
+    check(err)
 
-	return string(ifconfig) + "\n"
+    // It ain't silly if it works
+    ifconfig = regexp.MustCompile("inet \\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}").Find(ifconfig)
+    ifconfig = regexp.MustCompile("\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}").Find(ifconfig)
+
+    return string(ifconfig) + "\n"
 }
 
 func showCTypes() {
