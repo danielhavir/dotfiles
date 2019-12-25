@@ -74,6 +74,9 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Docker
 Plugin 'ekalinin/Dockerfile.vim'
 
+" Fish
+Plugin 'dag/vim-fish'
+
 " Install L9 and avoid a Naming conflict if you've already installed a
 " different version somewhere else.
 " Plugin 'ascenator/L9', {'name': 'newL9'}
