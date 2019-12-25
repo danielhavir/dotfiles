@@ -10,6 +10,11 @@ cd $HOME
 rm -rf dotfiles/
 ```
 
+Or alternatively single line setup:
+```shell script
+curl -fsSl https://danielhavir.github.io/setup.sh | sh
+```
+
 ### Shell
 
 #### Fish
