@@ -1,5 +1,15 @@
 # dotfiles
 
+Run:
+
+```shell script
+git clone https://github.com/danielhavir/dotfiles $HOME
+cd $HOME/dotfiles/
+bash setup.sh
+cd $HOME
+rm -rf dotfiles/
+```
+
 ### Shell
 
 #### Fish

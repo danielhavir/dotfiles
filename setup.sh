@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 
 os=$(uname)
 
@@ -12,11 +11,24 @@ then
   echo "OS: $os"
   profilefile="$HOME/.bash_profile"
 else
+  tput setaf 1
+  tput bold
   echo "Unknown OS: $os"
-  exit 0
+  tput sgr0
+  exit 1
 fi
 
-#sed -i "1s;^;$(cat bash_profile)\n;" $profilefile
+if [ ! -f "$profilefile" ]
+  then
+    tput setaf 1
+    tput bold
+    echo "Profile file $profilefile does not exist in OS $os"
+    tput sgr0
+    exit 1
+fi
+
+# Prepend basic config to profile file
+echo -e "$(cat bash_profile)\n\n$(cat "$profilefile")" > "$profilefile"
 
 # Copy aliases to profile file
 {
@@ -26,9 +38,9 @@ fi
 } >> "$profilefile"
 
 # Copy SSH configuration
-mkdir -p ".ssh/"
-touch ".ssh/config"
-cat ssh/config >> ".ssh/config"
+mkdir -p "$HOME/.ssh/"
+touch "$HOME/.ssh/config"
+cat ssh/config >> "$HOME/.ssh/config"
 
 # Copy VIM configuration
 cp vimrc "$HOME/.vimrc"
@@ -37,3 +49,11 @@ cp vimrc "$HOME/.vimrc"
 fish_home="$HOME/.config/fish"
 mkdir -p "$fish_home"
 cp config/fish/* "$fish_home"
+
+# Copy JSON IO helpers
+cp jsonio.py "$HOME"
+
+tput setaf 2
+tput bold
+echo "Finished setup. Source file $profilefile"
+tput sgr0
