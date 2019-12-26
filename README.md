@@ -3,7 +3,7 @@
 Run:
 
 ```shell script
-git clone https://github.com/danielhavir/dotfiles $HOME
+git clone https://github.com/danielhavir/dotfiles $HOME/dotfiles
 cd $HOME/dotfiles/
 bash setup.sh
 cd $HOME
@@ -14,8 +14,6 @@ Or alternatively single line setup:
 ```shell script
 curl -fsSl https://danielhavir.github.io/setup.sh | sh
 ```
-
-### Shell
 
 #### Fish
 
