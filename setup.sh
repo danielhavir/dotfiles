@@ -53,6 +53,10 @@ cp config/fish/* "$fish_home"
 # Copy JSON IO helpers
 cp jsonio.py "$HOME"
 
+# Copy and source TMUX config
+cp tmux.conf "$HOME/.tmux.conf"
+tmux source-file "$HOME/.tmux.conf"
+
 tput setaf 2
 tput bold
 echo "Finished setup. Source file $profilefile"
