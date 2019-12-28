@@ -34,3 +34,5 @@ alias smi="nvidia-smi -l 1"
 
 # Docker
 alias d="docker"
+alias dco="docker container"
+alias dim="docker image"

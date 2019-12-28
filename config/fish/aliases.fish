@@ -33,4 +33,6 @@ alias gstop "gcloud compute instances stop"
 alias smi "nvidia-smi -l 1"
 
 # Docker
-alias docker "d"
+alias d "docker"
+alias dco "docker container"
+alias dim "docker image"
