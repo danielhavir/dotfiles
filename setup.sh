@@ -34,6 +34,7 @@ echo -e "$(cat bash_profile)\n\n$(cat "$profilefile")" > "$profilefile"
 {
   echo
   cat aliases.sh
+  cat kubernetes-helpers.sh
   echo
 } >> "$profilefile"
 

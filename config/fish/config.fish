@@ -1,4 +1,5 @@
 source $HOME/.config/fish/aliases.fish
+source $HOME/.config/fish/kubernetes-helpers.fish
 
 # Fish prompt/color config {{{
 
