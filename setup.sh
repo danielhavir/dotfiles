@@ -4,12 +4,12 @@ os=$(uname)
 
 if [ "$os" == "Linux" ]
 then
-  echo "OS: $os"
   profilefile="$HOME/.bashrc"
+  echo "Known OS: $os => using $profilefile"
 elif [ "$os" == "Darwin" ]
 then
-  echo "OS: $os"
   profilefile="$HOME/.bash_profile"
+  echo "Known OS: $os => using $profilefile"
 else
   tput setaf 1
   tput bold
@@ -34,6 +34,7 @@ echo -e "$(cat bash_profile)\n\n$(cat "$profilefile")" > "$profilefile"
 {
   echo
   cat aliases.sh
+  echo
   cat kubernetes-helpers.sh
   echo
 } >> "$profilefile"
