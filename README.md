@@ -12,7 +12,7 @@ rm -rf dotfiles/
 
 Or alternatively single line setup:
 ```shell script
-curl -fsSl https://danielhavir.github.io/setup.sh | sh
+curl -fsSL https://danielhavir.github.io/setup.sh | sh
 ```
 
 #### Fish
@@ -24,3 +24,11 @@ curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fi
 fisher add edc/bass
 ```
 * [Setup Conda for Fish](https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html#using-with-fish-shell) - `conda init fish`
+
+#### ZShell
+
+* Install Oh-My-Zsh
+```shell script
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+* Change theme `ZSH_THEME="risto"`
