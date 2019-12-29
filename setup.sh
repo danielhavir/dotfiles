@@ -27,6 +27,9 @@ if [ ! -f "$profilefile" ]
     exit 1
 fi
 
+# Create profile file backup
+cp "$profilefile" "$profilefile.backup"
+
 # Prepend basic config to profile file
 echo -e "$(cat bash_profile)\n\n$(cat "$profilefile")" > "$profilefile"
 

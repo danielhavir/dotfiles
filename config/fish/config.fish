@@ -1,8 +1,13 @@
-source $HOME/.config/fish/aliases.fish
-source $HOME/.config/fish/kubernetes-helpers.fish
+set source_files \
+  "$HOME/.config/fish/aliases.fish" \
+  "$HOME/.config/fish/kubernetes-helpers.fish" \
+  "$HOME/.config/fish/private.fish" \
+  "$HOME/google-cloud-sdk/path.fish.inc"
 
-if test -e "$HOME/google-cloud-sdk/path.fish.inc"
-  source "$HOME/google-cloud-sdk/path.fish.inc"
+for file in $source_files
+  if test -e "$file"
+    source "$file"
+  end
 end
 
 # Fish prompt/color config {{{
