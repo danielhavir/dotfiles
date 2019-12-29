@@ -51,6 +51,9 @@ fish_home="$HOME/.config/fish"
 mkdir -p "$fish_home"
 cp config/fish/* "$fish_home"
 
+# Install Fisher
+curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish
+
 # Copy JSON IO helpers
 cp jsonio.py "$HOME"
 

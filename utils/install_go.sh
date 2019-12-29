@@ -45,6 +45,7 @@ echo "####"
 
 echo "${green}Go successfully installed${normal}"
 echo "Export PATH ${bold}export PATH=\$PATH:/usr/local/go/bin${normal}"
+echo "Export PATH (Fish shell) ${bold}set PATH \$PATH /usr/local/go/bin${normal}"
 echo "To set path automatically on next login, add ${yellow}${bold}export PATH=\$PATH:/usr/local/go/bin${normal} to ${yellow}${bold}~/.profile${normal}"
 
 # Remove the tar file

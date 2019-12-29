@@ -1,6 +1,10 @@
 source $HOME/.config/fish/aliases.fish
 source $HOME/.config/fish/kubernetes-helpers.fish
 
+if test -e "$HOME/google-cloud-sdk/path.fish.inc"
+  source "$HOME/google-cloud-sdk/path.fish.inc"
+end
+
 # Fish prompt/color config {{{
 
 function fish_prompt

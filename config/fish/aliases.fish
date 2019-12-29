@@ -12,6 +12,9 @@ end
 # Ping
 alias pingg "ping google.com -c 10"
 
+# Tmux
+alias tm "tmux"
+
 # Github
 alias g "git"
 alias gs "git status"
