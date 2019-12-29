@@ -3,3 +3,6 @@
 
 # JetBrains
 .idea/
+
+# Private files not to be included
+**/private.*

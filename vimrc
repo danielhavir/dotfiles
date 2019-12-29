@@ -62,7 +62,8 @@ Plugin 'vim-syntastic/syntastic'
 Plugin 'nvie/vim-flake8'
 
 " Color Scheme
-Plugin 'jnurmine/Zenburn'
+" Plugin 'jnurmine/Zenburn'
+Plugin 'whatyouhide/vim-gotham'
 
 " Status bar
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
@@ -102,4 +103,8 @@ let g:ycm_python_interpreter_path='/home/daniel/anaconda3/bin/python'
 let g:ycm_extra_conf_vim_data=['g:ycm_python_interpreter_path']
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
-colorscheme zenburn
+" Map W to :w and Q to :q
+nnoremap W :w<CR>
+nnoremap Q :q<CR>
+
+colorscheme gotham256
