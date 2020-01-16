@@ -1,4 +1,6 @@
 # Kubernetes
+alias kubget="kubectl get"
+
 function watch-pod() {
 	 watch "kubectl get pods | grep ${1}"
 }
@@ -16,6 +18,16 @@ function delete-job() {
 function delete-pod() {
 	pod_name=$(kubectl get pods -o=name | grep "${1}" | cut -c 5-)
 	kubectl delete pods "$pod_name"
+}
+
+function delete-dep() {
+	deployment_name=$(kubectl get deployments -o=name | grep "${1}" | cut -c 23-)
+	kubectl delete deployment "$deployment_name"
+}
+
+function edit-dep() {
+	deployment_name=$(kubectl get deployments -o=name | grep "${1}" | cut -c 23-)
+	kubectl edit "deployment/$deployment_name"
 }
 
 function pod-ssh() {

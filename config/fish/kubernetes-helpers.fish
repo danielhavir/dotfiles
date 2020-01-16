@@ -1,4 +1,6 @@
 # Kubernetes
+alias kubget "kubectl get"
+
 function watch-pod
   watch "kubectl get pods | grep $argv[1]"
 end
@@ -16,6 +18,16 @@ end
 function delete-pod
 	set pod_name (kubectl get pods -o=name | grep "$argv[1]" | cut -c 5-)
 	kubectl delete pods "$pod_name"
+end
+
+function delete-dep
+	set deployment_name (kubectl get deployments -o=name | grep "$argv[1]" | cut -c 23-)
+	kubectl delete deployment "$deployment_name"
+end
+
+function edit-dep
+	set deployment_name (kubectl get deployments -o=name | grep "$argv[1]" | cut -c 23-)
+	kubectl edit "deployment/$deployment_name"
 end
 
 function pod-ssh
