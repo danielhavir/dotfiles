@@ -27,6 +27,18 @@ set omnifunc=syntaxcomplete#Complete
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
+autocmd Filetype go setlocal tabstop=4 shiftwidth=4 softtabstop=4
+" ts - show existing tab with 4 spaces width
+" sw - when indenting with '>', use 4 spaces width
+" sts - control <tab> and <bs> keys to match tabstop
+
+" Control all other files
+set shiftwidth=4
+
+" Allow backspace to delete indentation and inserted text
+" i.e. how it works in most programs
+set backspace=indent,eol,start
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -108,6 +120,9 @@ let g:ycm_server_python_interpreter='/home/daniel/anaconda3/bin/python'
 let g:ycm_python_interpreter_path='/home/daniel/anaconda3/bin/python'
 let g:ycm_extra_conf_vim_data=['g:ycm_python_interpreter_path']
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+" format with goimports instead of gofmt
+let g:go_fmt_command = "goimports"
 
 " Map W to :w and Q to :q
 nnoremap W :w<CR>
