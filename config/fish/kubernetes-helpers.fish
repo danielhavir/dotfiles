@@ -1,5 +1,7 @@
 # Kubernetes
-alias kubget "kubectl get"
+alias kgp="kubectl get pods"
+alias kgd="kubectl get deployments"
+alias kgj="kubectl get jobs"
 
 function watch-pod
   watch "kubectl get pods | grep $argv[1]"
