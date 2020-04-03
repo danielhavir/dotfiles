@@ -1,8 +1,7 @@
-# Kubernetes
-alias kubget="kubectl get"
+#!/bin/bash
 
 function watch-pod() {
-	 watch "kubectl get pods | grep ${1}"
+	watch "kubectl get pods | grep ${1}"
 }
 
 function pod-logs() {
@@ -37,23 +36,22 @@ function pod-ssh() {
 
 function count-pods() {
 	num_args="$#"
-	if [[ "$num_args" > "1" ]]
+	if [[ "$num_args" -gt "1" ]]
 	then
-		watch "kubectl get pods | grep "${1}" | grep "${2}" | wc -l"
-	elif [[ "$num_args" > "0" ]]
+		watch "kubectl get pods | grep \"${1}\" | grep -c \"${2}\""
+	elif [[ "$num_args" -gt "0" ]]
 	then
-		watch "kubectl get pods | grep "${1}" | grep "Running" | wc -l"
+		watch "kubectl get pods | grep \"${1}\" | grep -c \"Running\""
 	else
 		echo "Please specify deployment name, and optionally state (\"Running\" by default)"
 	fi
 }
 
 function delete-evicted() {
-	if [[ "$num_args" > "0" ]]
+	if [[ "$num_args" -gt "0" ]]
 	then
 		kubectl get pods | grep "${1}" | grep "Evicted" | awk '{print $1}' | xargs kubectl delete pod
 	else
 		echo "Please specify deployment name"
 	fi
 }
-

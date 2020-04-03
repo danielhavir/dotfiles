@@ -39,9 +39,9 @@ end
 
 function count-pods
 	if test (count $argv) -gt 1
-		watch "kubectl get pods | grep "$argv[1]" | grep "$argv[2]" | wc -l"	
+		watch "kubectl get pods | grep \"$argv[1]\" | grep -c \"$argv[2]\""
 	else if test (count $argv) -gt 0
-		watch "kubectl get pods | grep "$argv[1]" | grep "Running" | wc -l"	
+		watch "kubectl get pods | grep \"$argv[1]\" | grep -c \"Running\""
 	else
 		echo "Please specify deployment name, and optionally state (\"Running\" by default)"
 	end
