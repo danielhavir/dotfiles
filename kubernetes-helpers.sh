@@ -48,6 +48,7 @@ function count-pods() {
 }
 
 function delete-evicted() {
+	num_args="$#"
 	if [[ "$num_args" -gt "0" ]]
 	then
 		kubectl get pods | grep "${1}" | grep "Evicted" | awk '{print $1}' | xargs kubectl delete pod
