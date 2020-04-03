@@ -34,3 +34,26 @@ function pod-ssh() {
 	pod_name=$(kubectl get pods -o=name | grep "${1}" | cut -c 5-)
 	kubectl exec -it "$pod_name" bash
 }
+
+function count-pods() {
+	num_args="$#"
+	if [[ "$num_args" > "1" ]]
+	then
+		watch "kubectl get pods | grep "${1}" | grep "${2}" | wc -l"
+	elif [[ "$num_args" > "0" ]]
+	then
+		watch "kubectl get pods | grep "${1}" | grep "Running" | wc -l"
+	else
+		echo "Please specify deployment name, and optionally state (\"Running\" by default)"
+	fi
+}
+
+function delete-evicted() {
+	if [[ "$num_args" > "0" ]]
+	then
+		kubectl get pods | grep "${1}" | grep "Evicted" | awk '{print $1}' | xargs kubectl delete pod
+	else
+		echo "Please specify deployment name"
+	fi
+}
+
