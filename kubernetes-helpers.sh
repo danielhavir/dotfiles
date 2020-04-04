@@ -10,7 +10,7 @@ function pod-logs() {
 }
 
 function delete-job() {
-  job_name=$(kubectl get jobs -o=name | grep "${1}" | cut -c 11-)
+	job_name=$(kubectl get jobs -o=name | grep "${1}" | cut -c 11-)
 	kubectl delete job "$job_name"
 }
 
