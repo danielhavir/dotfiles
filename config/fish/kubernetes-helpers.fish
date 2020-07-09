@@ -47,9 +47,11 @@ function count-pods
 	end
 end
 
-function delete-evicted
-	if test (count $argv) -gt 0
-		kubectl get pods | grep "$argv[1]" | grep "Evicted" | awk '{print $1}' | xargs kubectl delete pod
+function delete-pods
+    if test (count $argv) -gt 1
+		kubectl get pods | grep "$argv[1]" | grep "$argv[2]" | awk '{print $1}' | xargs kubectl delete pod
+	else if test (count $argv) -gt 0
+		kubectl get pods | grep "$argv[1]" | awk '{print $1}' | xargs kubectl delete pod
 	else
 		echo "Please specify deployment name"
 	end
