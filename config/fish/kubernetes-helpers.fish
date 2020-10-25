@@ -4,7 +4,7 @@ alias kgd="kubectl get deployments"
 alias kgj="kubectl get jobs"
 
 function watch-pod
-  watch "kubectl get pods | grep $argv[1]"
+	watch "kubectl get pods | grep $argv[1]"
 end
 
 function pod-logs
@@ -13,7 +13,7 @@ function pod-logs
 end
 
 function delete-job
-  set job_name (kubectl get jobs -o=name | grep "$argv[1]" | cut -c 11-)
+	set job_name (kubectl get jobs -o=name | grep "$argv[1]" | cut -c 11-)
 	kubectl delete job "$job_name"
 end
 
@@ -34,7 +34,7 @@ end
 
 function pod-ssh
 	set pod_name (kubectl get pods -o=name | grep "$argv[1]" | cut -c 5-)
-	kubectl exec -it "$pod_name" bash
+	kubectl exec -it "$pod_name" -- bash
 end
 
 function count-pods
@@ -56,4 +56,3 @@ function delete-pods
 		echo "Please specify deployment name"
 	end
 end
-

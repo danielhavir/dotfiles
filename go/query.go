@@ -43,7 +43,7 @@ func openPage(url string) *http.Response {
 }
 
 func getRandCommit() string {
-	res := openPage("https://whatthecommit.com/")
+	res := openPage("http://whatthecommit.com/")
 	defer res.Body.Close()
 	if res.StatusCode != 200 {
 		log.Fatalf("status code error: %d %s", res.StatusCode, res.Status)

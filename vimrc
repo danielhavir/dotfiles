@@ -64,7 +64,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'vim-scripts/indentpython.vim'
 
 " Auto-Complete
-Bundle 'Valloric/YouCompleteMe'
+" Bundle 'Valloric/YouCompleteMe'
 
 " TMUX
 Plugin 'christoomey/vim-tmux-navigator'
@@ -115,11 +115,11 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
-let g:ycm_autoclose_preview_window_after_completion=1
-let g:ycm_server_python_interpreter='/home/daniel/anaconda3/bin/python'
-let g:ycm_python_interpreter_path='/home/daniel/anaconda3/bin/python'
-let g:ycm_extra_conf_vim_data=['g:ycm_python_interpreter_path']
-map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" let g:ycm_autoclose_preview_window_after_completion=1
+" let g:ycm_server_python_interpreter='/home/daniel/anaconda3/bin/python'
+" let g:ycm_python_interpreter_path='/home/daniel/anaconda3/bin/python'
+" let g:ycm_extra_conf_vim_data=['g:ycm_python_interpreter_path']
+" map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 " format with goimports instead of gofmt
 let g:go_fmt_command = "goimports"

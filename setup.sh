@@ -52,6 +52,10 @@ cp vimrc "$HOME/.vimrc"
 
 # Install Vundle
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+tput setaf 5
+tput bold
+echo "Vundle set up, run \":PluginInstall\" in Vim"
+tput sgr0
 
 # Copy configuration for Fish shell
 fish_home="$HOME/.config/fish"

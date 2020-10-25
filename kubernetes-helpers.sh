@@ -31,7 +31,7 @@ function edit-dep() {
 
 function pod-ssh() {
 	pod_name=$(kubectl get pods -o=name | grep "${1}" | cut -c 5-)
-	kubectl exec -it "$pod_name" bash
+	kubectl exec -it "$pod_name" -- bash
 }
 
 function count-pods() {
