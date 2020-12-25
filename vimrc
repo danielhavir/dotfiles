@@ -126,6 +126,6 @@ let g:go_fmt_command = "goimports"
 
 " Map W to :w and Q to :q
 nnoremap W :w<CR>
-nnoremap Q :q<CR>
+nnoremap Q :q!<CR>
 
 colorscheme gotham256
