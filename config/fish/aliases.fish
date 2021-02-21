@@ -20,6 +20,7 @@ alias g "git"
 alias gs "git status"
 alias gadd "git add"
 alias gpo "git push origin"
+alias gco "git checkout"
 
 function commit
   git commit -m "$argv[1]"
