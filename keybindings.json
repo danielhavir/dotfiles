@@ -54,5 +54,17 @@
         "key": "ctrl+k ctrl+j",
         "command": "-editor.unfoldAll",
         "when": "editorTextFocus && foldingEnabled"
+    },
+    {
+        "key": "ctrl+shift+w",
+        "command": "-workbench.action.closeWindow"
+    },
+    {
+        "key": "ctrl+shift+w",
+        "command": "workbench.action.closeAllGroups"
+    },
+    {
+        "key": "ctrl+k ctrl+shift+w",
+        "command": "-workbench.action.closeAllGroups"
     }
 ]
