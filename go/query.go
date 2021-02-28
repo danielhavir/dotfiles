@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"crypto/rand"
 	"flag"
 	"fmt"
@@ -12,7 +13,9 @@ import (
 	"syscall"
 
 	"github.com/PuerkitoBio/goquery"
+	"github.com/atotto/clipboard"
 	"github.com/fatih/color"
+	"github.com/go-redis/redis/v8"
 	"golang.org/x/crypto/chacha20poly1305"
 	"golang.org/x/crypto/ssh/terminal"
 )
@@ -72,14 +75,14 @@ func getIPAddress(prefix string) string {
 }
 
 func getLocalIPAddress() string {
-    ifconfig, err := exec.Command("ifconfig", "eno1").Output()
-    check(err)
+	ifconfig, err := exec.Command("ifconfig", "eno1").Output()
+	check(err)
 
-    // It ain't silly if it works
-    ifconfig = regexp.MustCompile("inet \\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}").Find(ifconfig)
-    ifconfig = regexp.MustCompile("\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}").Find(ifconfig)
+	// It ain't silly if it works
+	ifconfig = regexp.MustCompile("inet \\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}").Find(ifconfig)
+	ifconfig = regexp.MustCompile("\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}").Find(ifconfig)
 
-    return string(ifconfig) + "\n"
+	return string(ifconfig) + "\n"
 }
 
 func showCTypes() {
@@ -137,6 +140,77 @@ func decryptFile(cipher, key []byte) (plain []byte) {
 	return
 }
 
+func push() {
+	rdb := redis.NewClient(&redis.Options{
+		Addr:     "localhost:6379",
+		Password: "",
+		DB:       0,
+	})
+	defer rdb.Close()
+
+	text, err := clipboard.ReadAll()
+	check(err)
+
+	err = rdb.LPush(context.Background(), "clip", text).Err()
+	check(err)
+}
+
+func pop() {
+	rdb := redis.NewClient(&redis.Options{
+		Addr:     "localhost:6379",
+		Password: "",
+		DB:       0,
+	})
+	defer rdb.Close()
+
+	text := rdb.LPop(context.Background(), "clip").Val()
+
+	err := clipboard.WriteAll(text)
+	check(err)
+}
+
+func wipe() {
+	rdb := redis.NewClient(&redis.Options{
+		Addr:     "localhost:6379",
+		Password: "",
+		DB:       0,
+	})
+	defer rdb.Close()
+
+	err := rdb.Del(context.Background(), "clip").Err()
+	check(err)
+}
+
+func list() {
+	rdb := redis.NewClient(&redis.Options{
+		Addr:     "localhost:6379",
+		Password: "",
+		DB:       0,
+	})
+	defer rdb.Close()
+
+	result, err := rdb.LRange(context.Background(), "clip", 0, -1).Result()
+	check(err)
+	for i, r := range result {
+		fmt.Println(i, r)
+	}
+}
+
+func get(i int64) {
+	rdb := redis.NewClient(&redis.Options{
+		Addr:     "localhost:6379",
+		Password: "",
+		DB:       0,
+	})
+	defer rdb.Close()
+
+	text := rdb.LIndex(context.Background(), "clip", i).Val()
+	fmt.Println(i)
+
+	err := clipboard.WriteAll(text)
+	check(err)
+}
+
 func main() {
 	ip := flag.Bool("ip", false, "Get public IP address")
 	ipv4 := flag.Bool("ipv4", false, "Get public IPv4 address")
@@ -146,6 +220,12 @@ func main() {
 	randCommit := flag.Bool("rc", false, "Get random commit")
 	encrypt := flag.Bool("en", false, "Encrypt")
 	decrypt := flag.Bool("de", false, "Decrypt")
+	i := flag.Int64("i", 0, "Index")
+	pushCmd := flag.Bool("push", false, "Push value from clipboard to stack")
+	popCmd := flag.Bool("pop", false, "Pop value from stack to clipboard")
+	wipeCmd := flag.Bool("wipe", false, "Delete all values from stack")
+	listCmd := flag.Bool("list", false, "List all values in stack")
+	getCmd := flag.Bool("get", false, "Get value at Index from stack")
 	inputPath := flag.String("in", "", "Path to input file.")
 	outputPath := flag.String("out", "", "Path to output file.")
 	flag.Parse()
@@ -173,6 +253,16 @@ func main() {
 		plain := decryptFile(cipher, getKey())
 		writefile(plain, *outputPath)
 		s = "File " + *inputPath + " decrypted into " + *outputPath + "\n"
+	} else if *pushCmd {
+		push()
+	} else if *popCmd {
+		pop()
+	} else if *wipeCmd {
+		wipe()
+	} else if *listCmd {
+		list()
+	} else if *getCmd {
+		get(*i)
 	}
 	fmt.Print(s)
 }
