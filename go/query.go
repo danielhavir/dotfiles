@@ -8,6 +8,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 	"os/exec"
 	"regexp"
 	"syscall"
@@ -140,56 +141,50 @@ func decryptFile(cipher, key []byte) (plain []byte) {
 	return
 }
 
-func push() {
-	rdb := redis.NewClient(&redis.Options{
-		Addr:     "localhost:6379",
-		Password: "",
+func getRedisClient() (rds *redis.Client) {
+	addr := fmt.Sprintf("%s:%s", os.Getenv("REDIS_HOST"), os.Getenv("REDIS_PORT"))
+	rds = redis.NewClient(&redis.Options{
+		Addr:     addr,
+		Password: os.Getenv("REDIS_PASSWORD"),
 		DB:       0,
 	})
-	defer rdb.Close()
+	return
+}
+
+func push() {
+	rds := getRedisClient()
+	defer rds.Close()
 
 	text, err := clipboard.ReadAll()
 	check(err)
 
-	err = rdb.LPush(context.Background(), "clip", text).Err()
+	err = rds.LPush(context.Background(), "clip", text).Err()
 	check(err)
 }
 
 func pop() {
-	rdb := redis.NewClient(&redis.Options{
-		Addr:     "localhost:6379",
-		Password: "",
-		DB:       0,
-	})
-	defer rdb.Close()
+	rds := getRedisClient()
+	defer rds.Close()
 
-	text := rdb.LPop(context.Background(), "clip").Val()
+	text := rds.LPop(context.Background(), "clip").Val()
 
 	err := clipboard.WriteAll(text)
 	check(err)
 }
 
 func wipe() {
-	rdb := redis.NewClient(&redis.Options{
-		Addr:     "localhost:6379",
-		Password: "",
-		DB:       0,
-	})
-	defer rdb.Close()
+	rds := getRedisClient()
+	defer rds.Close()
 
-	err := rdb.Del(context.Background(), "clip").Err()
+	err := rds.Del(context.Background(), "clip").Err()
 	check(err)
 }
 
 func list() {
-	rdb := redis.NewClient(&redis.Options{
-		Addr:     "localhost:6379",
-		Password: "",
-		DB:       0,
-	})
-	defer rdb.Close()
+	rds := getRedisClient()
+	defer rds.Close()
 
-	result, err := rdb.LRange(context.Background(), "clip", 0, -1).Result()
+	result, err := rds.LRange(context.Background(), "clip", 0, -1).Result()
 	check(err)
 	for i, r := range result {
 		fmt.Println(i, r)
@@ -197,15 +192,10 @@ func list() {
 }
 
 func get(i int64) {
-	rdb := redis.NewClient(&redis.Options{
-		Addr:     "localhost:6379",
-		Password: "",
-		DB:       0,
-	})
-	defer rdb.Close()
+	rds := getRedisClient()
+	defer rds.Close()
 
-	text := rdb.LIndex(context.Background(), "clip", i).Val()
-	fmt.Println(i)
+	text := rds.LIndex(context.Background(), "clip", i).Val()
 
 	err := clipboard.WriteAll(text)
 	check(err)
