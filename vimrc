@@ -1,3 +1,4 @@
+let mapleader = ","
 
 
 " set the runtime path to include Vundle and initialize
@@ -24,9 +25,6 @@ Plugin 'junegunn/fzf.vim'
 " git plugin
 Plugin 'tpope/vim-fugitive'
 
-" fuzzy search
-Plugin 'wincent/command-t'
-
 " Nerdtree
 Plugin 'preservim/nerdtree'
 
@@ -51,11 +49,12 @@ Plugin 'vim-syntastic/syntastic'
 " PEP8
 Plugin 'nvie/vim-flake8'
 
-" CTpickRLP Plugin
-Plugin 'kien/ctrlp.vim'
+" CTRLP Plugin - fuzzy search
+Plugin 'ctrlpvim/ctrlp.vim'
+" Plugin 'wincent/command-t'
 
 " Case-preserved substitute
-Plugin 'tpope/vim-abolish.vim'
+Plugin 'tpope/vim-abolish.git'
 
 " Status/tabline
 Plugin 'vim-airline/vim-airline'
@@ -72,7 +71,8 @@ Plugin 'roxma/vim-tmux-clipboard'
 
 " Color Scheme
 " Plugin 'jnurmine/Zenburn'
-Plugin 'whatyouhide/vim-gotham'
+" Plugin 'whatyouhide/vim-gotham'
+Plugin 'doum/darcula'
 
 " Docker
 Plugin 'ekalinin/Dockerfile.vim'
@@ -187,6 +187,7 @@ iabbrev functoin function
 iabbrev fucntion function
 
 let g:ycm_show_diagnostics_ui = 1
+let g:TerminusFocusReporting=0
 
 "folding settings
 set foldmethod=syntax
@@ -270,6 +271,9 @@ let g:jedi#popup_select_first = 0
 " let g:jedi#completions_command = "<C-h>"
 let g:jedi#usages_command = "<leader>z"
 
+let g:flake8_show_in_gutter=1  " show
+autocmd FileType python map <buffer> <leader>f :call flake8#Flake8()<CR>
+
 " Better navigating through omnicomplete option list
 " See http://stackoverflow.com/questions/2170023/how-to-map-keys-for-popup-menu-in-vim
 set completeopt=longest,menuone
@@ -350,12 +354,15 @@ let g:go_fmt_command = "goimports"
 
 " Map W to :w
 nnoremap W :w<CR>
-" Q to :q!
-nnoremap Q :q!<CR>
+" Q to :q
+nnoremap Q :q<CR>
 " <space> to -- VISUAL --
 nnoremap <space> viw
 " better use of H and L
 nnoremap H ^
 nnoremap L $
 
-colorscheme gotham256
+nnoremap <leader>v <C-w>v<C-w>l
+nnoremap <leader>s <C-w>s<C-w>j
+
+colorscheme darcula
