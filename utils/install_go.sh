@@ -2,7 +2,7 @@
 # Resource 1: https://golang.org/doc/install#install
 # Resource 2: https://alexatnet.com/install-go-on-raspberry-pi/
 
-version="1.15.6"
+version="1.16.2"
 machine=$(uname -m)
 
 bold=$(tput bold)
