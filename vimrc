@@ -263,7 +263,23 @@ nnoremap <F10> :b <C-Z>
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*/venv/*,
 let g:clear_cache_on_exit = 0
 let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|_build'
+
+" Use per-session caching
+let g:ctrlp_use_caching = 1
+
+" Prevent CtrlP from taking all the window
+let g:ctrlp_max_height = 30
+
+" Max number of files and tree depth
+let g:ctrlp_max_files = 50000
+" let g:ctrlp_max_depth = 80
+let g:ctrlp_root_markers = ['.ctrlp']
+
+" CtrlP ignore list
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](build|tmp|Test|data|doc|ecto_framework|rviz|CMakeFiles|build-generated|2nd_party|3rd_party|control|gencpp|maps|packaging|sensors|tools)|(\.(build|git|hg|svn|cmake|tmp|rviz))$',
+  \ 'file': '\v\.(cxx|exe|so|a|dll|txt|bag|mov|png|jpg|avi|cmake|make|tmp|zip|swp|orig)$',
+  \ }
 
 " Settings for jedi-vim
 let g:jedi#popup_select_first = 0
