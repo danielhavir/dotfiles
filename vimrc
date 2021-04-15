@@ -372,6 +372,8 @@ let g:go_fmt_command = "goimports"
 nnoremap W :w<CR>
 " Q to :q
 nnoremap Q :q<CR>
+" ! to :q!
+nnoremap ! :q!<CR>
 " <space> to -- VISUAL --
 nnoremap <space> viw
 " better use of H and L
