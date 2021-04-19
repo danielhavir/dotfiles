@@ -1,14 +1,21 @@
 #!/bin/bash
 
+set -e
+
 os=$(uname)
 
 if [ "$os" == "Linux" ]
 then
   profilefile="$HOME/.bashrc"
   echo "Known OS: $os => using $profilefile"
+  sudo apt-add-repository ppa:fish-shell/release-3
+  sudo apt-get update --fix-missing
+  sudo apt-get remove --auto-remove vim-tiny
+  sudo apt-get install -y vim silversearcher-ag fish
 elif [ "$os" == "Darwin" ]
 then
   profilefile="$HOME/.bash_profile"
+  brew install the_silver_searcher || echo "brew not installed, skipping."
   echo "Known OS: $os => using $profilefile"
 else
   tput setaf 1
@@ -47,15 +54,15 @@ mkdir -p "$HOME/.ssh/"
 touch "$HOME/.ssh/config"
 cat ssh/config >> "$HOME/.ssh/config"
 
-# Copy VIM configuration
-cp vimrc "$HOME/.vimrc"
-
 # Install Vundle
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 tput setaf 5
 tput bold
 echo "Vundle set up, run \":PluginInstall\" in Vim"
 tput sgr0
+
+# Setup .vimrc
+bash install_vimrc.sh
 
 # Copy configuration for Fish shell
 fish_home="$HOME/.config/fish"
