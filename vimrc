@@ -17,9 +17,9 @@ call SourceIfExists('~/.config/vim/plugins/nerdcomment.vim')
 call SourceIfExists('~/.config/vim/plugins/nerdtree.vim')
 call SourceIfExists('~/.config/vim/plugins/vim-go.vim')
 
-" Local config
-call SourceIfExists('~/.vimrc.local')
-
 source ~/.config/vim/keymapping.vim
 source ~/.config/vim/color.vim
+
+" Local config
+call SourceIfExists('~/.vimrc.local')
 

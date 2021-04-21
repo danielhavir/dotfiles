@@ -25,8 +25,8 @@ if [ -f "$VIMRC" ]; then
   cp $VIMRC "$HOME/.vimrc.copy"
 fi
 
-mkdir -p "$HOME/.vim/swap/"
-mkdir -p "$HOME/.vim/backup/"
+mkdir -p "$HOME/.vim/tmp/swap/"
+mkdir -p "$HOME/.vim/tmp/backup/"
 
 if [ $LINK_FILES = 1 ]
 then
@@ -57,12 +57,12 @@ else
     VIMRC_FILES+=("$VIM_PLUGIN_DIR/ycm.vim")
   fi
 
+  VIMRC_FILES+=("$VIM_DIR/keymapping.vim" "$VIM_DIR/color.vim")
+
   if [ -f "$HOME/.vimrc.local" ]
   then
     VIMRC_FILES+=("$HOME/.vimrc.local")
   fi
-
-  VIMRC_FILES+=("$VIM_DIR/keymapping.vim" "$VIM_DIR/color.vim")
 
   for file in "${VIMRC_FILES[@]}"
   do
@@ -74,5 +74,5 @@ else
 fi
 
 tput setaf 2
-echo "Setup vimrc"
+echo "Set up vimrc successfully"
 tput sgr0
