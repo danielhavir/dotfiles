@@ -44,9 +44,11 @@ else
     "$VIM_DIR/bundles.vim"
     "$VIM_DIR/autocmd.vim"
     "$VIM_DIR/settings.vim"
+    "$VIM_DIR/keymapping.vim"
+    "$VIM_PLUGIN_DIR/coc.vim"
     "$VIM_PLUGIN_DIR/ctrlp.vim"
     "$VIM_PLUGIN_DIR/flake.vim"
-    "$VIM_PLUGIN_DIR/jedi.vim"
+    # "$VIM_PLUGIN_DIR/jedi.vim"
     "$VIM_PLUGIN_DIR/nerdcomment.vim"
     "$VIM_PLUGIN_DIR/nerdtree.vim"
     "$VIM_PLUGIN_DIR/vim-go.vim"
@@ -57,7 +59,7 @@ else
     VIMRC_FILES+=("$VIM_PLUGIN_DIR/ycm.vim")
   fi
 
-  VIMRC_FILES+=("$VIM_DIR/keymapping.vim" "$VIM_DIR/color.vim")
+  VIMRC_FILES+=("$VIM_DIR/color.vim")
 
   if [ -f "$HOME/.vimrc.local" ]
   then

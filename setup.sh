@@ -54,11 +54,12 @@ mkdir -p "$HOME/.ssh/"
 touch "$HOME/.ssh/config"
 cat ssh/config >> "$HOME/.ssh/config"
 
-# Install Vundle
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+# Install vim-plug
+curl -fLo ~/.var/app/io.neovim.nvim/data/nvim/site/autoload/plug.vim \
+      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 tput setaf 5
 tput bold
-echo "Vundle set up, run \":PluginInstall\" in Vim"
+echo "vim-plug set up, run \":PlugInstall\" in Vim"
 tput sgr0
 
 # Setup .vimrc
