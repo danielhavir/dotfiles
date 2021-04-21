@@ -8,10 +8,9 @@ if [ "$os" == "Linux" ]
 then
   profilefile="$HOME/.bashrc"
   echo "Known OS: $os => using $profilefile"
-  sudo apt-add-repository ppa:fish-shell/release-3
-  sudo apt-get update --fix-missing
-  sudo apt-get remove --auto-remove vim-tiny
-  sudo apt-get install -y vim silversearcher-ag fish
+  ./utils/install_fish.sh || echo "could not install fish, skipping."
+  ./utils/install_vim.sh || echo "could not install vim, skipping."
+  ./utils/install_node.sh || echo "could not install nodejs (for coc), skipping."
 elif [ "$os" == "Darwin" ]
 then
   profilefile="$HOME/.bash_profile"
@@ -55,15 +54,14 @@ touch "$HOME/.ssh/config"
 cat ssh/config >> "$HOME/.ssh/config"
 
 # Install vim-plug
-curl -fLo ~/.var/app/io.neovim.nvim/data/nvim/site/autoload/plug.vim \
-      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 tput setaf 5
 tput bold
 echo "vim-plug set up, run \":PlugInstall\" in Vim"
 tput sgr0
 
 # Setup .vimrc
-bash install_vimrc.sh
+./install_vimrc.sh
 
 # Copy configuration for Fish shell
 fish_home="$HOME/.config/fish"
