@@ -51,6 +51,7 @@ else
     # "$VIM_PLUGIN_DIR/jedi.vim"
     "$VIM_PLUGIN_DIR/nerdcomment.vim"
     "$VIM_PLUGIN_DIR/nerdtree.vim"
+    "$VIM_PLUGIN_DIR/simpylfold.vim"
     "$VIM_PLUGIN_DIR/vim-go.vim"
   )
 

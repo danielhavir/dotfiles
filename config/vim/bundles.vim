@@ -4,6 +4,7 @@ call plug#begin('~/.vim/plugs')
 
 " Autocomplete plugin
 " Plug 'davidhalter/jedi-vim'
+" COC for the win!
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Auto-Complete
@@ -17,6 +18,9 @@ Plug 'junegunn/fzf.vim'
 
 " git plugin
 Plug 'tpope/vim-fugitive'
+
+" Surround text with parentheses, brackets, quotes etc.
+Plug 'tpope/vim-surround'
 
 " Nerdtree
 Plug 'preservim/nerdtree'
@@ -32,6 +36,9 @@ Plug 'amix/open_file_under_cursor.vim'
 
 " Indentation
 Plug 'vim-scripts/indentpython.vim'
+
+" Folding
+Plug 'tmhedberg/SimpylFold'
 
 " TMUX
 Plug 'christoomey/vim-tmux-navigator'

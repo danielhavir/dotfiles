@@ -17,6 +17,7 @@ call SourceIfExists('~/.config/vim/plugins/flake.vim')
 " call SourceIfExists('~/.config/vim/plugins/jedi.vim')
 call SourceIfExists('~/.config/vim/plugins/nerdcomment.vim')
 call SourceIfExists('~/.config/vim/plugins/nerdtree.vim')
+call SourceIfExists('~/.config/vim/plugins/simpylfold.vim')
 call SourceIfExists('~/.config/vim/plugins/vim-go.vim')
 
 source ~/.config/vim/color.vim
