@@ -8,19 +8,19 @@ nnoremap Q :q<CR>
 " ! to :q!
 nnoremap ! :q!<CR>
 " <space> to -- VISUAL --
-nnoremap <space> viw
+nnoremap <space>v viw
+" remap original H and L
+noremap <space>h H
+noremap <space>l L
+noremap <space>m M
 " better use of H and L
 noremap H ^
 nnoremap L $
 vnoremap L $<left>
+nnoremap cl c$
 
 " delete without putting to buffer
 vnoremap d "_d
-" paste over current selection
-nnoremap <leader>p "*p
-vnoremap p "_dP
-" remove selected text and switch to insert mode
-vnoremap <leader>i "_d<Esc>i
 
 " replace word under cursor in normal mode
 nnoremap <leader>r :%s/<C-r><C-w>//c<left><left>
@@ -30,13 +30,16 @@ vnoremap <C-r> "hy:%s/<C-r>h//c<left><left>
 vnoremap <leader>r "hy:%s/<C-r>h//c<left<left>
 vnoremap <leader><leader>r "hy:%s/\<<C-r>h\>//c<left><left>
 
-nnoremap <leader>v <C-w>v<C-w>l
-nnoremap <leader>s <C-w>s<C-w>j
+" visual box
+nnoremap <leader>v <C-v>
+" similar to tmux
+nnoremap <C-v> <C-w>v<C-w>l
+nnoremap <C-s> <C-w>s<C-w>j
 
 " Mapping for frequent fzf commands
 nnoremap <silent> <leader>ag :Ag <C-R><C-W><CR>
 nnoremap <silent> <leader>h :History<CR>
-nnoremap <silent> <C-B> :Buffers<CR>
+" nnoremap <silent> <C-B> :Buffers<CR>
 
 " Typos
 iabbrev teh the
@@ -52,8 +55,8 @@ noremap <C-N><C-N> :set invnumber<CR>
 nnoremap <CR> :nohlsearch<CR>
 
 "NERD Tree
-map <leader><leader>n :NERDTreeToggle <CR>
-map <leader><leader>nf :NERDTreeFind <CR>
+map <space><space> :NERDTreeToggle <CR>
+map <space><space>f :NERDTreeFind <CR>
 
 " BufExplorer mapping
 nnoremap <leader><leader>be :BufExplorer <CR>
