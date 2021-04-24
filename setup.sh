@@ -139,6 +139,9 @@ cp jsonio.py "$HOME"
 
 # Copy and source TMUX config
 cp tmux.conf "$HOME/.tmux.conf"
-tmux source-file "$HOME/.tmux.conf"
+if ! tmux source-file "$HOME/.tmux.conf" &> /dev/null
+then
+  echo "tmux not installed, source $HOME/.tmux.conf later"
+fi
 
 echo "${green}${bold}Finished setup. Source file $profilefile${reset}"
