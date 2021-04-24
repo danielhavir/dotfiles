@@ -2,6 +2,7 @@
 
 set -e
 
+IN_DOCKER=0
 SKIP_FISH=0
 WITH_K8S=0
 LINK_VIMRC=0
@@ -13,6 +14,10 @@ do
   key="$1"
 
   case $key in
+    --in-docker|--in_docker)
+      IN_DOCKER=1
+      shift
+      ;;
     --skip-fish|--skip_fish)
       SKIP_FISH=1
       shift
@@ -52,8 +57,19 @@ reset=$(tput sgr0)
 
 if [ "$os" == "Linux" ]
 then
+  if [ $IN_DOCKER = 1 ]
+  then
+    echo "${magenta}${bold}Running setup script in Docker${reset}"
+    if [[ $EUID -ne 0 ]]
+    then
+      echo "${red}${bold}Running as $(whoami), hope you know what you're doing...${reset}"
+      apt-get install -y sudo
+    fi
+  fi
   profilefile="$HOME/.bashrc"
   echo "Known OS: $os => using $profilefile"
+  sudo apt-get install -y software-properties-common
+
   if [ $SKIP_FISH = 0 ]
   then
     ./utils/install_fish.sh || echo "${red}could not install fish, skipping.${reset}"
@@ -70,6 +86,11 @@ then
   sudo apt-get install -y silversearcher-ag || echo "${red}could not install Ag, skipping.${reset}"
 elif [ "$os" == "Darwin" ]
 then
+  if [ $IN_DOCKER = 1 ]
+  then
+    echo "${red}${bold}Setup in Docker for $os is not supported ${reset}"
+    exit 1
+  fi
   profilefile="$HOME/.bash_profile"
   brew install the_silver_searcher || echo "${red}brew not installed, skipping.${reset}"
   echo "Known OS: $os => using $profilefile"
@@ -141,7 +162,7 @@ cp jsonio.py "$HOME"
 cp tmux.conf "$HOME/.tmux.conf"
 if ! tmux source-file "$HOME/.tmux.conf" &> /dev/null
 then
-  echo "tmux not installed, source $HOME/.tmux.conf later"
+  echo "${magenta}tmux not installed, source $HOME/.tmux.conf later${reset}"
 fi
 
 echo "${green}${bold}Finished setup. Source file $profilefile${reset}"
