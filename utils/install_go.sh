@@ -6,6 +6,7 @@ set -e
 
 version="1.16.2"
 machine=$(uname -m)
+os=$(uname)
 
 bold=$(tput bold)
 yellow=$(tput setaf 3)
@@ -18,7 +19,6 @@ then
     tarfile="go$version.linux-armv6l.tar.gz"
 elif [ "$machine" == "x86_64" ]
 then
-    os=$(uname)
     if [ "$os" == "Linux" ]
     then
         echo "Arch: $os $machine"
