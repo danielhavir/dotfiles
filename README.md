@@ -5,13 +5,13 @@ Run:
 ```shell script
 git clone https://github.com/danielhavir/dotfiles $HOME/dotfiles
 cd $HOME/dotfiles/
-bash setup.sh
+bash setup.sh --with-k8s
 cd $HOME
 ```
 
 Or alternatively single line setup:
 ```shell script
-curl -fsSL https://danielhavir.github.io/setup.sh | sh
+curl -fsSL https://danielhavir.github.io/setup.sh | bash -s -- --with-k8s
 ```
 
 ### Vim
