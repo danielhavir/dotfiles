@@ -60,9 +60,10 @@ then
   if [ $IN_DOCKER = 1 ]
   then
     echo "${magenta}${bold}Running setup script in Docker${reset}"
-    if [[ $EUID -ne 0 ]]
+    if [[ $EUID -eq 0 ]]
     then
-      echo "${red}${bold}Running as $(whoami), hope you know what you're doing...${reset}"
+      echo "${red}${bold}Running as $(whoami), sleeping for 10, hope you know what you're doing...${reset}"
+      sleep 10
       apt-get install -y sudo
     fi
   fi
