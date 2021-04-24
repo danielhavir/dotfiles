@@ -37,6 +37,10 @@ echo "####"
 
 url="https://dl.google.com/go/$tarfile"
 echo "${bold}Downloading${reset} $url"
+if [ "$os" == "Linux" ]
+then
+  sudo apt-get install -y wget
+fi
 wget $url
 echo "####"
 
