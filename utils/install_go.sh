@@ -10,7 +10,7 @@ machine=$(uname -m)
 bold=$(tput bold)
 yellow=$(tput setaf 3)
 green=$(tput setaf 2)
-normal=$(tput sgr0)
+reset=$(tput sgr0)
 
 if [ "$machine" == "armv7l" ]
 then
@@ -36,7 +36,7 @@ fi
 echo "####"
 
 url="https://dl.google.com/go/$tarfile"
-echo "${bold}Downloading${normal} $url"
+echo "${bold}Downloading${reset} $url"
 wget $url
 echo "####"
 
@@ -45,10 +45,10 @@ echo "Extracting $tarfile, sudo privileges required:"
 sudo tar -C /usr/local -xzf $tarfile
 echo "####"
 
-echo "${green}Go successfully installed${normal}"
-echo "Export PATH ${bold}export PATH=\$PATH:/usr/local/go/bin${normal}"
-echo "Export PATH (Fish shell) ${bold}set PATH \$PATH /usr/local/go/bin${normal}"
-echo "To set path automatically on next login, add ${yellow}${bold}export PATH=\$PATH:/usr/local/go/bin${normal} to ${yellow}${bold}~/.profile${normal}"
+echo "${green}Go successfully installed${reset}"
+echo "Export PATH ${bold}export PATH=\$PATH:/usr/local/go/bin${reset}"
+echo "Export PATH (Fish shell) ${bold}set PATH \$PATH /usr/local/go/bin${reset}"
+echo "To set path automatically on next login, add ${yellow}${bold}export PATH=\$PATH:/usr/local/go/bin${reset} to ${yellow}${bold}~/.profile${reset}"
 
 # Remove the tar file
 rm -f $tarfile

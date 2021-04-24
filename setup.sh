@@ -44,43 +44,43 @@ done
 
 os=$(uname)
 
+red=$(tput setaf 1)
+green=$(tput setaf 2)
+magenta=$(tput setaf 5)
+bold=$(tput bold)
+reset=$(tput sgr0)
+
 if [ "$os" == "Linux" ]
 then
   profilefile="$HOME/.bashrc"
   echo "Known OS: $os => using $profilefile"
   if [ $SKIP_FISH = 0 ]
   then
-    ./utils/install_fish.sh || echo "could not install fish, skipping."
+    ./utils/install_fish.sh || echo "${red}could not install fish, skipping.${reset}"
   fi
-  ./utils/install_vim.sh || echo "could not install vim, skipping."
+  ./utils/install_vim.sh || echo "${red}could not install vim, skipping.${reset}"
   if [ $WITH_GO = 1 ]
   then
-    ./utils/install_go.sh
+    ./utils/install_go.sh || echo "${red}could not install go, skipping.${reset}"
   fi
   if [ $WITH_NODE = 1 ]
   then
-    ./utils/install_node.sh || echo "could not install nodejs (for coc), skipping."
+    ./utils/install_node.sh || echo "${red}could not install nodejs (for coc), skipping.${reset}"
   fi
-  sudo apt-get install -y silversearcher-ag || echo "could not install Ag, skipping."
+  sudo apt-get install -y silversearcher-ag || echo "${red}could not install Ag, skipping.${reset}"
 elif [ "$os" == "Darwin" ]
 then
   profilefile="$HOME/.bash_profile"
-  brew install the_silver_searcher || echo "brew not installed, skipping."
+  brew install the_silver_searcher || echo "${red}brew not installed, skipping.${reset}"
   echo "Known OS: $os => using $profilefile"
 else
-  tput setaf 1
-  tput bold
-  echo "Unknown OS: $os"
-  tput sgr0
+  echo "${red}${bold}Unknown OS: $os${reset}"
   exit 1
 fi
 
 if [ ! -f "$profilefile" ]
   then
-    tput setaf 1
-    tput bold
-    echo "Profile file $profilefile does not exist in OS $os"
-    tput sgr0
+    echo "${red}${bold}Profile file $profilefile does not exist in OS $os${reset}"
     exit 1
 fi
 
@@ -113,10 +113,7 @@ cat ssh/config >> "$HOME/.ssh/config"
 
 # Install vim-plug
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-tput setaf 5
-tput bold
-echo "vim-plug set up, run \":PlugInstall\" in Vim"
-tput sgr0
+echo "${magenta}${bold}vim-plug set up, run \":PlugInstall\" in Vim${reset}"
 
 # Setup .vimrc
 if [ $LINK_VIMRC = 1 ]
@@ -144,7 +141,4 @@ cp jsonio.py "$HOME"
 cp tmux.conf "$HOME/.tmux.conf"
 tmux source-file "$HOME/.tmux.conf"
 
-tput setaf 2
-tput bold
-echo "Finished setup. Source file $profilefile"
-tput sgr0
+echo "${green}${bold}Finished setup. Source file $profilefile${reset}"
