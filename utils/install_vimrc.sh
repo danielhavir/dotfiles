@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 os=$(uname)
 VIMRC="$HOME/.vimrc"
 
@@ -7,17 +9,17 @@ LINK_FILES=0
 
 while [[ $# -gt 0 ]]
 do
-key="$1"
+  key="$1"
 
-case $key in
-  -ln|--link)
-    LINK_FILES=1
-    shift
-  ;;
-  *)
-    echo "Unknown option $1"
-    shift
-  ;;
+  case $key in
+    -ln|--link)
+      LINK_FILES=1
+      shift
+      ;;
+    *)
+      echo "Unknown option $1"
+      shift
+      ;;
 esac
 done
 
