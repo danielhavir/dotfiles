@@ -17,8 +17,8 @@ curl -fsSL https://danielhavir.github.io/setup.sh | sh
 ### Vim
 
 Set up `.vimrc` via:
-* Concatenating [individual config files](config/vim/) into a single file `./install_vimrc.sh`
-* Linking the file `./install_vimrc.sh --link`
+* Concatenating [individual config files](config/vim/) into a single file `./utils/install_vimrc.sh`
+* Linking the file `./utils/install_vimrc.sh --link`
 
 #### Fish
 
