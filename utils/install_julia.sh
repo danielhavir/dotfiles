@@ -1,6 +1,8 @@
 #!/bin/bash
 # Resource 1: https://julialang.org/downloads/
 
+set -e
+
 major="1.5"
 minor="1.5.3"
 machine=$(uname -m)
