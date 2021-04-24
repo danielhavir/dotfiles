@@ -18,6 +18,11 @@ noremap H ^
 nnoremap L $
 vnoremap L $<left>
 nnoremap cl c$
+nnoremap dl d$
+nnoremap yl y$
+nnoremap ch c^
+nnoremap dh d^
+nnoremap yh y^
 
 " delete without putting to buffer
 vnoremap d "_d
@@ -27,7 +32,7 @@ nnoremap <leader>r :%s/<C-r><C-w>//c<left><left>
 nnoremap <leader><leader>r :%s/\<<C-r><C-w>\>//c<left><left>
 " replace selected text in visual mode
 vnoremap <C-r> "hy:%s/<C-r>h//c<left><left>
-vnoremap <leader>r "hy:%s/<C-r>h//c<left<left>
+vnoremap <leader>r "hy:%s/<C-r>h//c<left><left>
 vnoremap <leader><leader>r "hy:%s/\<<C-r>h\>//c<left><left>
 
 " visual box

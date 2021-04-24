@@ -61,7 +61,7 @@ echo "vim-plug set up, run \":PlugInstall\" in Vim"
 tput sgr0
 
 # Setup .vimrc
-./install_vimrc.sh
+./utils/install_vimrc.sh
 
 # Copy configuration for Fish shell
 fish_home="$HOME/.config/fish"
