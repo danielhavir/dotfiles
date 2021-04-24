@@ -4,34 +4,61 @@
 
 set -e
 
-version="1.16.2"
 machine=$(uname -m)
 os=$(uname)
 
 bold=$(tput bold)
 yellow=$(tput setaf 3)
 green=$(tput setaf 2)
+red=$(tput setaf 1)
 reset=$(tput sgr0)
 
-if [ "$machine" == "armv7l" ]
+version="1.16.2"
+
+while [[ $# -gt 0 ]]
+do
+  key="$1"
+
+  case $key in
+    --go-version|--go_version)
+      version="$2"
+      shift
+      shift
+      ;;
+    *)
+      tput setaf 3
+      echo "Unknown option $1"
+      tput sgr0
+      shift
+      ;;
+esac
+done
+
+echo "${yellow}${bold}Installing Go, version ${version}${reset}"
+
+if [ "$machine" == "armv7l" ] || [ "$machine" == "armv6l" ]
 then
-    echo "Arch: $machine"
-    tarfile="go$version.linux-armv6l.tar.gz"
+  echo "Arch: $machine"
+  tarfile="go$version.linux-armv6l.tar.gz"
 elif [ "$machine" == "x86_64" ]
 then
-    if [ "$os" == "Linux" ]
-    then
-        echo "Arch: $os $machine"
-        tarfile="go$version.linux-amd64.tar.gz"
-    elif [ "$os" == "Darwin" ]
-    then
-        echo "Arch: $os $machine"
-        tarfile="go$version.darwin-amd64.tar.gz"
-    fi
-else
-    tput setaf 1; tput bold; echo "Unknown CPU architecture $machine"; tput sgr0
+  if [ "$os" == "Linux" ]
+  then
+    echo "Arch: $os $machine"
+    tarfile="go$version.linux-amd64.tar.gz"
+  elif [ "$os" == "Darwin" ]
+  then
+    echo "Arch: $os $machine"
+    tarfile="go$version.darwin-amd64.tar.gz"
+  else
+    echo "${red}${bold}Unknown OS $os${reset}"
     echo "Visit https://golang.org/dl/"
-    exit 0
+    exit 1
+  fi
+else
+  echo "${red}${bold}Unknown CPU architecture $machine${reset}"
+  echo "Visit https://golang.org/dl/"
+  exit 1
 fi
 echo "####"
 
