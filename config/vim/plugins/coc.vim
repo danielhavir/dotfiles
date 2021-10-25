@@ -11,6 +11,7 @@ let g:coc_global_extensions = [
             \'coc-clangd',
             \'coc-cmake',
             \'coc-go',
+            \'coc-rls',
             \'coc-sql',
             \'coc-yaml',
             \]
