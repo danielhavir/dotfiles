@@ -14,12 +14,17 @@ autocmd BufWritePre * %s/\s\+$//e
 autocmd BufRead,BufNewFile *.py setlocal tabstop=4 shiftwidth=4 smarttab expandtab softtabstop=4 autoindent
 autocmd BufRead,BufNewFile *.py setlocal filetype=python fileformat=unix
 autocmd BufRead,BufNewFile *.yaml setlocal tabstop=2 shiftwidth=2 smarttab expandtab softtabstop=2 autoindent
+autocmd BufRead,BufNewFile *.xml setlocal tabstop=2 shiftwidth=2 expandtab softtabstop=2 autoindent
 autocmd BufRead,BufNewFile *.json setlocal tabstop=2 shiftwidth=2 smarttab expandtab softtabstop=2 autoindent
 autocmd BufRead,BufNewFile *.html setlocal smarttab expandtab autoindent
 autocmd BufRead,BufNewFile *.js, *.html, *.css set tabstop=2 softtabstop=2 shiftwidth=2
 autocmd BufRead,BufNewFile *.go setlocal tabstop=4 shiftwidth=4 smarttab expandtab softtabstop=4 autoindent
 autocmd BufRead,BufNewFile *.jsjs set filetype=scala
 autocmd BufRead,BufNewFile *.cu set filetype=cpp
+
+" ROS files
+autocmd BufRead,BufNewFile *.launch,*.world,*.xacro set filetype=xml
+autocmd BufRead,BufNewFile *.launch,*.world,*.xacro setlocal tabstop=2 shiftwidth=2 expandtab softtabstop=2 autoindent
 
 augroup group1
     autocmd!

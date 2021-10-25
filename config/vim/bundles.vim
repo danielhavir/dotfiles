@@ -86,5 +86,9 @@ Plug 'rust-lang/rust.vim'
 " Go
 Plug 'fatih/vim-go'
 
+" ROS
+" Uncomment if necessary
+" Plug 'taketwo/vim-ros'
+
 " All of your Plugins must be added before the following line
 call plug#end()
