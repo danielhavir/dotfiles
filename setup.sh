@@ -7,6 +7,7 @@ SKIP_FISH=0
 WITH_K8S=0
 LINK_VIMRC=0
 WITH_GO=0
+WITH_RUST=0
 WITH_NODE=0
 
 while [[ $# -gt 0 ]]
@@ -28,6 +29,10 @@ do
       ;;
     --with-go|--with_go)
       WITH_GO=1
+      shift
+      ;;
+    --with-rust|--with_rust)
+      WITH_RUST=1
       shift
       ;;
     --with-node|--with_node)
@@ -80,6 +85,10 @@ then
   then
     ./utils/install_go.sh || echo "${red}could not install go, skipping.${reset}"
   fi
+  if [ $WITH_RUST = 1 ]
+  then
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh || echo "${red}could not install rust, skipping.${reset}"
+  fi
   if [ $WITH_NODE = 1 ]
   then
     ./utils/install_node.sh || echo "${red}could not install nodejs (for coc), skipping.${reset}"
@@ -91,6 +100,14 @@ then
   then
     echo "${red}${bold}Setup in Docker for $os is not supported ${reset}"
     exit 1
+  fi
+  if [ $WITH_GO = 1 ]
+  then
+    ./utils/install_go.sh || echo "${red}could not install go, skipping.${reset}"
+  fi
+  if [ $WITH_RUST = 1 ]
+  then
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh || echo "${red}could not install rust, skipping.${reset}"
   fi
   profilefile="$HOME/.bash_profile"
   brew install the_silver_searcher || echo "${red}brew not installed, skipping.${reset}"

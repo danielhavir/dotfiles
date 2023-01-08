@@ -13,7 +13,7 @@ green=$(tput setaf 2)
 red=$(tput setaf 1)
 reset=$(tput sgr0)
 
-version="1.16.2"
+version="1.19.4"
 
 while [[ $# -gt 0 ]]
 do
@@ -50,6 +50,17 @@ then
   then
     echo "Arch: $os $machine"
     tarfile="go$version.darwin-amd64.tar.gz"
+  else
+    echo "${red}${bold}Unknown OS $os${reset}"
+    echo "Visit https://golang.org/dl/"
+    exit 1
+  fi
+elif [ "$machine" == "arm64" ]
+then
+  if [ "$os" == "Darwin" ]
+  then
+    echo "Arch: $os $machine"
+    tarfile="go$version.darwin-arm64.tar.gz"
   else
     echo "${red}${bold}Unknown OS $os${reset}"
     echo "Visit https://golang.org/dl/"

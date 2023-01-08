@@ -7,6 +7,9 @@ call plug#begin('~/.vim/plugs')
 " COC for the win!
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+" GitHub Copilot
+Plug 'github/copilot.vim'
+
 " Auto-Complete
 " Plug 'Valloric/YouCompleteMe'
 
