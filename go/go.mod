@@ -7,5 +7,5 @@ require (
 	github.com/atotto/clipboard v0.1.4
 	github.com/fatih/color v1.10.0
 	github.com/go-redis/redis/v8 v8.6.0
-	golang.org/x/crypto v0.0.0-20210220033148-5ea612d1eb83
+	golang.org/x/crypto v0.1.0
 )
