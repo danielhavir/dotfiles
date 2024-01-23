@@ -11,7 +11,7 @@ cd $HOME
 
 Or alternatively single line setup:
 ```shell script
-curl -fsSL https://danielhavir.github.io/setup.sh | bash -s -- --with-k8s
+curl -fsSL https://danielhavir.com/setup.sh | bash -s -- --with-k8s
 ```
 
 ### Vim
