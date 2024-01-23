@@ -71,6 +71,9 @@ then
       sleep 10
       apt-get install -y sudo
     fi
+    # set timezone to prevent tzdata in Docker from freezing
+    ln -sf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
+    echo "America/Los_Angeles" > /etc/timezone
   fi
   profilefile="$HOME/.bashrc"
   echo "Known OS: $os => using $profilefile"
