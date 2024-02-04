@@ -11,7 +11,7 @@ let g:coc_global_extensions = [
             \'coc-clangd',
             \'coc-cmake',
             \'coc-go',
-            \'coc-rls',
+            \'coc-rust-analyzer',
             \'coc-sql',
             \'coc-yaml',
             \]
@@ -67,3 +67,9 @@ nmap <C-b> <Plug>(coc-definition)
 " nmap <silent> gy <Plug>(coc-type-definition)
 " nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> <leader><leader>r <Plug>(coc-references)
+
+" Rust
+let g:rustfmt_autosave = 1
+let g:rustfmt_emit_files = 1
+let g:rustfmt_fail_silently = 0
+

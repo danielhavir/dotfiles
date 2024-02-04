@@ -8,7 +8,10 @@ call plug#begin('~/.vim/plugs')
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " GitHub Copilot
-Plug 'github/copilot.vim'
+" Plug 'github/copilot.vim'
+
+" Codeium
+Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
 
 " Auto-Complete
 " Plug 'Valloric/YouCompleteMe'
