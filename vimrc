@@ -12,6 +12,7 @@ source ~/.config/vim/keymapping.vim
 
 " Plugin specific settings
 call SourceIfExists('~/.config/vim/plugins/coc.vim')
+call SourceIfExists('~/.config/vim/plugins/codeium.vim')
 call SourceIfExists('~/.config/vim/plugins/ctrlp.vim')
 call SourceIfExists('~/.config/vim/plugins/flake.vim')
 " call SourceIfExists('~/.config/vim/plugins/jedi.vim')
