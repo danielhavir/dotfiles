@@ -5,13 +5,13 @@ call plug#begin('~/.vim/plugs')
 " Autocomplete plugin
 " Plug 'davidhalter/jedi-vim'
 " COC for the win!
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " GitHub Copilot
 " Plug 'github/copilot.vim'
 
 " Codeium
-Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
+" Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
 
 " Auto-Complete
 " Plug 'Valloric/YouCompleteMe'

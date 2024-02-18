@@ -77,7 +77,7 @@ then
   fi
   profilefile="$HOME/.bashrc"
   echo "Known OS: $os => using $profilefile"
-  sudo apt-get install -y software-properties-common
+  sudo apt-get install -y software-properties-common tmux
 
   if [ $SKIP_FISH = 0 ]
   then

@@ -18,7 +18,7 @@ import (
 	"github.com/fatih/color"
 	"github.com/go-redis/redis/v8"
 	"golang.org/x/crypto/chacha20poly1305"
-	"golang.org/x/crypto/ssh/terminal"
+	"golang.org/x/term"
 )
 
 const nonceSize = 24
@@ -80,8 +80,8 @@ func getLocalIPAddress() string {
 	check(err)
 
 	// It ain't silly if it works
-	ifconfig = regexp.MustCompile("inet \\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}").Find(ifconfig)
-	ifconfig = regexp.MustCompile("\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}").Find(ifconfig)
+	ifconfig = regexp.MustCompile(`inet \d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}`).Find(ifconfig)
+	ifconfig = regexp.MustCompile(`\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}`).Find(ifconfig)
 
 	return string(ifconfig) + "\n"
 }
@@ -108,7 +108,7 @@ func showCTypes() {
 
 func getKey() (key []byte) {
 	fmt.Print("Enter Password: ")
-	key, err := terminal.ReadPassword(int(syscall.Stdin))
+	key, err := term.ReadPassword(int(syscall.Stdin))
 	check(err)
 	if len(key) > 32 {
 		key = key[:32]
