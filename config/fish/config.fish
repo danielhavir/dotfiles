@@ -55,3 +55,40 @@ function fish_greeting
     echo "Greetings, emperor!"
     set_color normal
 end
+
+function find_container_id
+    set container_name_part $argv[1]
+    docker ps -a --filter "name=$container_name_part" --format "{{.ID}} {{.Names}}" | grep "$container_name_part" | head -n 1 | awk '{print $1}'
+end
+
+function find_image_id
+    set image_name_part $argv[1]
+    docker image ls --format "{{.ID}} {{.Repository}}" | grep "$image_name_part" | awk '{print $1}'
+end
+
+function source_env
+    set -l env_file $argv[1]
+    if test -z "$env_file"
+        set env_file ".env"
+    end
+
+    for line in (cat $env_file)
+        # Check if the line is commented out
+        set -l first_char (string sub -l 1 -- $line)
+        if test "$first_char" = "#"
+            continue
+        end
+
+        # Split line into key and value
+        set -l key (echo $line | cut -d= -f1)
+        set -l value (echo $line | cut -d= -f2-)
+
+        # Remove any spaces around key and value
+        set key (string trim $key)
+        set value (string trim $value)
+
+        # Handle export of the variable to global environment
+        set -gx $key $value
+    end
+end
+
