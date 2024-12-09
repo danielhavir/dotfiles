@@ -5,7 +5,6 @@ set -e
 IN_DOCKER=0
 SKIP_FISH=0
 WITH_K8S=0
-LINK_VIMRC=0
 WITH_GO=0
 WITH_RUST=0
 WITH_NODE=0
@@ -39,17 +38,13 @@ do
       WITH_NODE=1
       shift
       ;;
-    --link-vimrc|--link_vimrc)
-      LINK_VIMRC=1
-      shift
-      ;;
     *)
       tput setaf 3
       echo "Unknown option $1"
       tput sgr0
       shift
       ;;
-esac
+  esac
 done
 
 os=$(uname)
@@ -158,9 +153,9 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.c
 echo "${magenta}${bold}vim-plug set up, run \":PlugInstall\" in Vim${reset}"
 
 # Setup .vimrc
-if [ $LINK_VIMRC = 1 ]
+if [ $WITH_NODE = 1 ]
 then
-  ./utils/install_vimrc.sh --link
+  ./utils/install_vimrc.sh --include_coc
 else
   ./utils/install_vimrc.sh
 fi

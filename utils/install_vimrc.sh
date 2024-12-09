@@ -6,6 +6,7 @@ os=$(uname)
 VIMRC="$HOME/.vimrc"
 
 LINK_FILES=0
+INCLUDE_COC=0
 
 while [[ $# -gt 0 ]]
 do
@@ -16,11 +17,15 @@ do
       LINK_FILES=1
       shift
       ;;
+    -coc|--include_coc)
+      INCLUDE_COC=1
+      shift
+      ;;
     *)
       echo "Unknown option $1"
       shift
       ;;
-esac
+  esac
 done
 
 if [ -f "$VIMRC" ]; then
@@ -47,7 +52,13 @@ else
     "$VIM_DIR/autocmd.vim"
     "$VIM_DIR/settings.vim"
     "$VIM_DIR/keymapping.vim"
-    "$VIM_PLUGIN_DIR/coc.vim"
+  )
+
+  if [ $INCLUDE_COC = 1 ]; then
+    VIMRC_FILES+=("$VIM_PLUGIN_DIR/coc.vim")
+  fi
+
+  VIMRC_FILES+=(
     "$VIM_PLUGIN_DIR/codeium.vim"
     "$VIM_PLUGIN_DIR/ctrlp.vim"
     "$VIM_PLUGIN_DIR/flake.vim"
