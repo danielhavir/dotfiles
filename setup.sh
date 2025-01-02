@@ -3,7 +3,7 @@
 set -e
 
 IN_DOCKER=0
-SKIP_FISH=0
+WITH_FISH=0
 WITH_K8S=0
 WITH_GO=0
 WITH_RUST=0
@@ -19,7 +19,7 @@ do
       shift
       ;;
     --skip-fish|--skip_fish)
-      SKIP_FISH=1
+      WITH_FISH=1
       shift
       ;;
     --with-k8s|--with_k8s)
@@ -74,7 +74,7 @@ then
   echo "Known OS: $os => using $profilefile"
   sudo apt-get install -y software-properties-common tmux
 
-  if [ $SKIP_FISH = 0 ]
+  if [ $WITH_FISH = 1 ]
   then
     ./utils/install_fish.sh || echo "${red}could not install fish, skipping.${reset}"
   fi
@@ -160,7 +160,7 @@ else
   ./utils/install_vimrc.sh
 fi
 
-if [ $SKIP_FISH = 0 ]
+if [ $WITH_FISH = 1 ]
 then
   # Copy configuration for Fish shell
   fish_home="$HOME/.config/fish"
