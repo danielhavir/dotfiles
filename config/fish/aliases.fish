@@ -26,13 +26,6 @@ function commit
   git commit -m "$argv[1]"
 end
 
-# Google Cloud
-alias gssh "gcloud compute ssh"
-alias gscp "gcloud compute scp"
-alias glist "gcloud compute instances list"
-alias gstart "gcloud compute instances start"
-alias gstop "gcloud compute instances stop"
-
 # nVidia
 alias smi "nvidia-smi -l 1"
 

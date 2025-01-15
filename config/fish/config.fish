@@ -37,6 +37,10 @@ function git_current_branch -d 'Prints a human-readable representation of the cu
   end
 end
 
+function gpoc -d 'Push current branch to origin'                                                                                                                                                                                                          
+  git push origin (git_current_branch)
+end
+
 function git_prompt
   if git rev-parse --show-toplevel >/dev/null 2>&1
     set_color yellow
