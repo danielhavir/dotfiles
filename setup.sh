@@ -150,7 +150,6 @@ cat ssh/config >> "$HOME/.ssh/config"
 
 # Install vim-plug
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-echo "${magenta}${bold}vim-plug set up, run \":PlugInstall\" in Vim${reset}"
 
 # Setup .vimrc
 if [ $WITH_NODE = 1 ]
@@ -170,7 +169,7 @@ if [ $IN_DOCKER = 1 ]; then
 fi
 
 # Run PlugInstall non-interactively
-vim -es -u ~/.vimrc -i NONE -c "PlugInstall" -c "qa"
+vim -E -u ~/.vimrc +PlugInstall +qall > /dev/null 2>&1
 echo "${magenta}${bold}vim-plug plugins installed${reset}"
 
 if [ $WITH_FISH = 1 ]
