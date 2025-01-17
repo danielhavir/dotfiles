@@ -160,6 +160,19 @@ else
   ./utils/install_vimrc.sh
 fi
 
+if [ $IN_DOCKER = 1 ]; then
+  # If running in Docker/container, change colorscheme in .vimrc
+  sed -i 's/colorscheme darcula/colorscheme gotham/' "$HOME/.vimrc"
+  # Comment out darcula colorscheme in .vimrc
+  sed -i 's/Plug '\''doums\/darcula'\''/\" Plug '\''doums\/darcula'\''/' "$HOME/.vimrc"
+  # Uncomment gotham colorscheme in .vimrc
+  sed -i 's/\" Plug '\''whatyouhide\/vim-gotham'\''/Plug '\''whatyouhide\/vim-gotham'\''/' "$HOME/.vimrc"
+fi
+
+# Run PlugInstall non-interactively
+vim -es -u ~/.vimrc -i NONE -c "PlugInstall" -c "qa"
+echo "${magenta}${bold}vim-plug plugins installed${reset}"
+
 if [ $WITH_FISH = 1 ]
 then
   # Copy configuration for Fish shell

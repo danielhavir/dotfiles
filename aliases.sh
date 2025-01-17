@@ -42,6 +42,7 @@ gpoc() {
 
 # nVidia
 alias smi="nvidia-smi -l 1"
+alias tegra_release="cat /etc/nv_tegra_release"
 
 # Docker
 alias d="docker"
