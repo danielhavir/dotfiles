@@ -62,8 +62,8 @@ then
     echo "${magenta}${bold}Running setup script in Docker${reset}"
     if [[ $EUID -eq 0 ]]
     then
-      echo "${red}${bold}Running as $(whoami), sleeping for 10, hope you know what you're doing...${reset}"
-      sleep 10
+      echo "${red}${bold}Running as $(whoami), sleeping for 3, hope you know what you're doing...${reset}"
+      sleep 3
       apt-get install -y sudo
     fi
     # set timezone to prevent tzdata in Docker from freezing
@@ -169,7 +169,7 @@ if [ $IN_DOCKER = 1 ]; then
 fi
 
 # Run PlugInstall non-interactively
-vim -E -u ~/.vimrc +PlugInstall +qall > /dev/null 2>&1
+vim -E -u ~/.vimrc +PlugInstall +qall > /dev/null 2>&1 || true
 echo "${magenta}${bold}vim-plug plugins installed${reset}"
 
 if [ $WITH_FISH = 1 ]
