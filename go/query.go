@@ -5,7 +5,7 @@ import (
 	"crypto/rand"
 	"flag"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -30,13 +30,13 @@ func check(e error) {
 }
 
 func readfile(path string) []byte {
-	dat, err := ioutil.ReadFile(path)
+	dat, err := os.ReadFile(path)
 	check(err)
 	return dat
 }
 
 func writefile(text []byte, path string) {
-	err := ioutil.WriteFile(path, text, 0664)
+	err := os.WriteFile(path, text, 0664)
 	check(err)
 }
 
@@ -70,7 +70,7 @@ func getIPAddress(prefix string) string {
 	}
 
 	res := openPage(url)
-	text, err := ioutil.ReadAll(res.Body)
+	text, err := io.ReadAll(res.Body)
 	check(err)
 	return string(text)
 }
@@ -151,25 +151,32 @@ func getRedisClient() (rds *redis.Client) {
 	return
 }
 
-func push() {
+func push(text string, use_clip bool) {
 	rds := getRedisClient()
 	defer rds.Close()
 
-	text, err := clipboard.ReadAll()
-	check(err)
+	var err error
+	if use_clip {
+		text, err = clipboard.ReadAll()
+		check(err)
+	}
 
 	err = rds.LPush(context.Background(), "clip", text).Err()
 	check(err)
 }
 
-func pop() {
+func pop(use_clip bool) {
 	rds := getRedisClient()
 	defer rds.Close()
 
 	text := rds.LPop(context.Background(), "clip").Val()
 
-	err := clipboard.WriteAll(text)
-	check(err)
+	if use_clip {
+		err := clipboard.WriteAll(text)
+		check(err)
+	} else {
+		fmt.Print(text)
+	}
 }
 
 func wipe() {
@@ -191,14 +198,18 @@ func list() {
 	}
 }
 
-func get(i int64) {
+func get(i int64, use_clip bool) {
 	rds := getRedisClient()
 	defer rds.Close()
 
 	text := rds.LIndex(context.Background(), "clip", i).Val()
 
-	err := clipboard.WriteAll(text)
-	check(err)
+	if use_clip {
+		err := clipboard.WriteAll(text)
+		check(err)
+	} else {
+		fmt.Print(text)
+	}
 }
 
 func main() {
@@ -211,8 +222,11 @@ func main() {
 	encrypt := flag.Bool("en", false, "Encrypt")
 	decrypt := flag.Bool("de", false, "Decrypt")
 	i := flag.Int64("i", 0, "Index")
-	pushCmd := flag.Bool("push", false, "Push value from clipboard to stack")
-	popCmd := flag.Bool("pop", false, "Pop value from stack to clipboard")
+	stdinFlag := flag.Bool("stdin", false, "Read input from STDIN for push command")
+	text := flag.String("v", "", "Value")
+	clipCmd := flag.Bool("clip", false, "Use clipboard")
+	pushCmd := flag.Bool("push", false, "Push value to stack")
+	popCmd := flag.Bool("pop", false, "Pop value from stack")
 	wipeCmd := flag.Bool("wipe", false, "Delete all values from stack")
 	listCmd := flag.Bool("list", false, "List all values in stack")
 	getCmd := flag.Bool("get", false, "Get value at Index from stack")
@@ -244,15 +258,34 @@ func main() {
 		writefile(plain, *outputPath)
 		s = "File " + *inputPath + " decrypted into " + *outputPath + "\n"
 	} else if *pushCmd {
-		push()
+		var input string
+		if *stdinFlag {
+			// Read piped input when -stdin is set
+			bytes, err := io.ReadAll(os.Stdin)
+			check(err)
+			input = string(bytes)
+		} else if *text != "" {
+			input = *text
+		} else {
+			// Fallback: if something is piped, use it.
+			stat, _ := os.Stdin.Stat()
+			if (stat.Mode() & os.ModeCharDevice) == 0 {
+				bytes, err := io.ReadAll(os.Stdin)
+				check(err)
+				input = string(bytes)
+			} else {
+				log.Fatal("Must specify text with -v flag or pipe input (or use -stdin flag)")
+			}
+		}
+		push(input, *clipCmd)
 	} else if *popCmd {
-		pop()
+		pop(*clipCmd)
 	} else if *wipeCmd {
 		wipe()
 	} else if *listCmd {
 		list()
 	} else if *getCmd {
-		get(*i)
+		get(*i, *clipCmd)
 	}
 	fmt.Print(s)
 }

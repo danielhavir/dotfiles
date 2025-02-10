@@ -193,4 +193,10 @@ then
   echo "${magenta}tmux not installed, source $HOME/.tmux.conf later${reset}"
 fi
 
+if [ $IN_DOCKER = 1 ]; then
+  mkdir -p /tmp_tmux
+  echo "export TMUX_TMPDIR=/tmp_tmux" >> "$profilefile"
+fi
+
+
 echo "${green}${bold}Finished setup. Source file $profilefile${reset}"
