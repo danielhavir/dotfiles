@@ -264,18 +264,8 @@ func main() {
 			bytes, err := io.ReadAll(os.Stdin)
 			check(err)
 			input = string(bytes)
-		} else if *text != "" {
-			input = *text
 		} else {
-			// Fallback: if something is piped, use it.
-			stat, _ := os.Stdin.Stat()
-			if (stat.Mode() & os.ModeCharDevice) == 0 {
-				bytes, err := io.ReadAll(os.Stdin)
-				check(err)
-				input = string(bytes)
-			} else {
-				log.Fatal("Must specify text with -v flag or pipe input (or use -stdin flag)")
-			}
+			input = *text
 		}
 		push(input, *clipCmd)
 	} else if *popCmd {
