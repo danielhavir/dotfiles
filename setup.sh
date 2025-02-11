@@ -161,11 +161,11 @@ fi
 
 if [ $IN_DOCKER = 1 ]; then
   # If running in Docker/container, change colorscheme in .vimrc
-  sed -i 's/colorscheme darcula/colorscheme gotham/' "$HOME/.vimrc"
+  sed -i 's/colorscheme darcula/colorscheme zenburn/' "$HOME/.vimrc"
   # Comment out darcula colorscheme in .vimrc
   sed -i 's/Plug '\''doums\/darcula'\''/\" Plug '\''doums\/darcula'\''/' "$HOME/.vimrc"
-  # Uncomment gotham colorscheme in .vimrc
-  sed -i 's/\" Plug '\''whatyouhide\/vim-gotham'\''/Plug '\''whatyouhide\/vim-gotham'\''/' "$HOME/.vimrc"
+  # Uncomment zenburn colorscheme in .vimrc
+  sed -i 's/\" Plug '\''jnurmine\/Zenburn'\''/Plug '\''jnurmine\/Zenburn'\''/' "$HOME/.vimrc"
 fi
 
 # Run PlugInstall non-interactively
