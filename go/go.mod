@@ -1,7 +1,8 @@
 module github.com/danielhavir/dotfiles
 
-go 1.23
-toolchain go1.23.6
+go 1.23.0
+
+toolchain go1.24.2
 
 require (
 	github.com/PuerkitoBio/goquery v1.10.1

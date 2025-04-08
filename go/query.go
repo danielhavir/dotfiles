@@ -76,7 +76,7 @@ func getIPAddress(prefix string) string {
 }
 
 func getLocalIPAddress() string {
-	ifconfig, err := exec.Command("ifconfig", "en0").Output()
+	ifconfig, err := exec.Command("ifconfig", "wlp9s0").Output()
 	check(err)
 
 	// It ain't silly if it works
