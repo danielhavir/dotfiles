@@ -72,7 +72,7 @@ then
   fi
   profilefile="$HOME/.bashrc"
   echo "Known OS: $os => using $profilefile"
-  sudo apt-get install -y software-properties-common tmux
+  sudo apt-get install -y software-properties-common tmux xclip
 
   if [ $WITH_FISH = 1 ]
   then
