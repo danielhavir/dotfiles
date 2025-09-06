@@ -13,7 +13,7 @@ green=$(tput setaf 2)
 red=$(tput setaf 1)
 reset=$(tput sgr0)
 
-version="1.24.2"
+version="1.25.1"
 
 while [[ $# -gt 0 ]]
 do
