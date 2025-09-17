@@ -5,6 +5,9 @@
 set -e
 
 machine=$(uname -m)
+if [ "$machine" == "aarch64" ]; then
+  machine="arm64"
+fi
 os=$(uname)
 
 bold=$(tput bold)
@@ -61,6 +64,10 @@ then
   then
     echo "Arch: $os $machine"
     tarfile="go$version.darwin-arm64.tar.gz"
+  elif [ "$os" == "Linux" ]
+  then
+    echo "Arch: $os $machine"
+    tarfile="go$version.linux-arm64.tar.gz"
   else
     echo "${red}${bold}Unknown OS $os${reset}"
     echo "Visit https://golang.org/dl/"
